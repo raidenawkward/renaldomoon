@@ -4,6 +4,9 @@ More Joel on Software
 
 [toc]
 
+
+#[关于Joel文章的网站](http://www.joelonsoftware.com/)
+
 #乔尔测试
 ---------
 
@@ -79,4 +82,40 @@ spay项目是这样
 
 ##[这篇文章的原地址](http://www.joelonsoftware.com/articles/fog0000000043.html)
 
-##[关于Joel文章的网站](http://www.joelonsoftware.com/)
+
+
+
+#语言选择和代码优化
+-------------------
+
+##施勒梅尔算法
+~~Schlaemmer?~~
+
+```c++
+void strcat(char* dest, char* src) {
+   while (*dest) dest++;
+   while (*dest++ = *src++)
+}
+```
+
+每次都是重头开始
+**代码的效率**
+
+
+##有关字符串的问题
+
+###Pascal字符串
+>- 字符串长度在255以内
+>- 第一个字节存储字符串长度
+
+e.g.
+```c++
+char* str = "\006hello!";
+```
+
+
+###String, StringBuffer和StringBuilder
+1. String 内容不可变. 每次变更是生成了新的String. 大量String直接操作后会产生多个无用引用而
+引起jvm开始gc, 速度会变慢.
+2. StringBuffer**线程安全**, 维护缓冲区, 支持insert, append等操作, 对内容进行修改但不产生新对象.
+3. StringBuilder**线程不安全**, 提供与StringBuffer兼容的API, 但不保证同步. 单个线程中比StringBuffer快
